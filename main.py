@@ -8,7 +8,7 @@ import winsound
 from datetime import datetime
 
 # --- Configuración ---
-URL = "https://shop.afatickets.com.ar/content"
+URL = "https://shop.afatickets.com.ar/content?&lang=es"
 CHECK_INTERVAL = 15  # cada 15 segundos
 SIRENA_FILE = "sirena-tornado.wav"  # poné tu archivo de sirena en la misma carpeta
 HEADLESS = False  # True para monitoreo en background
@@ -73,10 +73,10 @@ def beep_suave():
 last_hash = None
 
 while True:
+    now = datetime.now().strftime("%H:%M:%S")
     try:
         current_html = get_ticket_html(driver)
         current_hash = hash_html(current_html)
-        now = datetime.now().strftime("%H:%M:%S")
 
         if last_hash is None:
             with open("initial_page.html", "w", encoding="utf-8") as f:
